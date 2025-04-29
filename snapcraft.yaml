@@ -1,0 +1,22 @@
+name: serve-pcrread
+summary: Exposes PCR registers on an HTTP endpoint.
+description: Demo snap
+version: v1.0.0
+base: core22
+confinement: strict
+
+parts:
+  serve-pcrread:
+    plugin: dump
+    source: .
+    organize:
+      serve-pcrread.sh: bin/serve-pcrread.sh
+    stage-packages:
+      - tpm2-tools
+
+apps:
+  serve-pcrread:
+    command: bin/serve-pcrread.sh
+    plugs:
+      - network-bind
+      - tpm
